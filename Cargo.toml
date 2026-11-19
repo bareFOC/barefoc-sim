@@ -1,0 +1,26 @@
+[package]
+name = "barefoc-sim"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/bareFOC/barefoc-sim"
+rust-version = "1.75"
+description = "Software-in-the-Loop (SIL) electromechanical BLDC motor simulator and ODrive GUI tuning bridge for BareFOC."
+
+[dependencies]
+barefoc = { path = "../bareFOC", default-features = false }
+barefoc-fibre = { path = "../barefoc-comms/barefoc-fibre", default-features = false, optional = true }
+libm = "0.2"
+
+[dev-dependencies]
+barefoc = { path = "../bareFOC", default-features = false, features = ["std"] }
+
+[features]
+default = ["std"]
+std = [
+    "barefoc/std",
+    "dep:barefoc-fibre",
+    "barefoc-fibre?/std",
+    "barefoc-fibre?/barefoc",
+    "barefoc-fibre?/embedded-io",
+]
